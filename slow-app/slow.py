@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 def random_wait():
-    return rnd.normal(3, 2)
+    return max(rnd.normal(3, 2), 0)
 
 @app.route("/ping")
 def ping():
