@@ -4,6 +4,7 @@ data:
   default.conf: |+
     limit_conn_zone $server_name zone=global:10m;
     limit_conn_status 503;
+    proxy_cache_path /opt/cache levels=1:2 keys_zone=global_cache:10m;
     
     server {
         listen       80;
@@ -11,7 +12,8 @@ data:
         server_name  localhost;
 
         location /ping {
-            limit_conn global 3;
+            limit_conn global 10;
+            proxy_cache global_cache;
             proxy_pass http://127.0.0.1:5000;
         }
     }

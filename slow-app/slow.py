@@ -19,6 +19,7 @@ def ping():
     }))
     resp.headers['X-Time'] = "{:.2f}".format(wait)
     resp.headers['Content-Type'] = 'application/json'
+    resp.headers['Cache-Control'] = 'max-age=5'
     
     return resp 
 
