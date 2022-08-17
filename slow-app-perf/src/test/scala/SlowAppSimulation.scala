@@ -7,6 +7,7 @@ class SlowAppSimulation extends Simulation {
 
   val httpProtocol = http
     .baseUrl("http://localhost:31313")
+    .shareConnections
 
   val scn = scenario("Ping")
     .exec(
@@ -16,7 +17,7 @@ class SlowAppSimulation extends Simulation {
 
   setUp(
     scn.inject(
-      constantUsersPerSec(1).during(60)
+      constantUsersPerSec(1000).during(60)
     )
   ).protocols(httpProtocol)
   
