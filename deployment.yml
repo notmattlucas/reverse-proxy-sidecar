@@ -2,12 +2,16 @@
 apiVersion: v1
 data:
   default.conf: |+
+    limit_conn_zone $server_name zone=global:10m;
+    limit_conn_status 503;
+    
     server {
         listen       80;
         listen  [::]:80;
         server_name  localhost;
 
         location /ping {
+            limit_conn global 3;
             proxy_pass http://127.0.0.1:5000;
         }
     }
